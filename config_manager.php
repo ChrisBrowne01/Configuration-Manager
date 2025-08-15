@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Project: PHP Constants - Configuration Manager
  * Description: A mini-project to demonstrate the use of PHP constants, including basic constants,
@@ -19,8 +18,8 @@ define('DB_NAME', getenv('DB_NAME') ?: 'myapp_db');
 // Application Information Constants
 define('APP_NAME', 'MyPHPApp');
 define('APP_VERSION', '1.0.0');
-define('DEBUG_MODE', getenv('APP_DEBUG') ?: 'Disabled'); // Using a boolean value is more common 
-// define('DEBUG_MODE', true); // outputs the same result, when used instead of the line above
+// define('DEBUG_MODE', getenv('APP_DEBUG') ?: 'Disabled'); // Using a boolean value is more common 
+define('DEBUG_MODE', true); // outputs the same result, when used instead of the line above
 
 /**
  * Note: The DEBUG_MODE constant is set based on the APP_DEBUG environment variable.
@@ -52,7 +51,7 @@ function displayAppInfo(): void {
   echo "<h3 class='text-2xl font-semibold mt-2'>Application Information:</h3>";
   echo "<p><strong>Name:</strong> " . APP_NAME . "</p>";
   echo "<p><strong>Version:</strong> " . APP_VERSION . "</p>";
-  echo "<p><strong>Debug Mode:</strong> " . (DEBUG_MODE ? 'Enabled' : 'Disabled') . "</p>";
+  echo "<p><strong>Debug Mode:</strong> " . (DEBUG_MODE? 'Enabled' : 'Disabled') . "</p>";
 }
 
 // Write a function to list supported languages.
