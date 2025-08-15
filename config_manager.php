@@ -37,7 +37,6 @@
     define('SUPPORTED_LANGUAGE', ['en' => 'English', 'es' => 'Spanish', 'fr' => 'French']);
 
     # --- 4. Create Display Functions: ---
-    echo "<h2>PHP Constants - Configuration Manager</h2><br>";
     // Implement a function to display database configuration.
     function db_config_details() {
       echo "<h3>Database configuration:</h3>";
@@ -45,9 +44,7 @@
       echo "User: " . DB_USERNAME . "<br>";
       echo "Database: " . DB_NAME . "<br>";
     }
-    db_config_details();
-
-    echo "<br>";
+    
     // Create a function to show application information.
     function app_info() {
       echo "<h3>Application Information:</h3>";
@@ -55,9 +52,7 @@
       echo "Version: " . APP_VERSION . "<br>";
       echo "Debug Mode: " . (DEBUG_MODE ? 'Enabled' : 'Disabled') . "<br>";
     }
-    app_info();
-    echo "<br>";
-
+    
     // Write a function to list supported languages.
     function supported_lang() {
       echo "<h3>Supported Languages:</h3>";
@@ -65,20 +60,36 @@
         echo "$lang: $language<br>";
       }
     }
+    
+    # --- 5. Demonstrate Constant Usage: ---
+    echo "<h2>PHP Constants - Configuration Manager</h2><br>";
+    db_config_details();
+    echo "<br>";
+    app_info();
+    echo "<br>";
     supported_lang();
     echo "<br>";
-
-    # --- 5. Demonstrate Constant Usage: ---
-
+    
     # --- 6. Case-Sensitivity Demonstration: ---
+    /* PHP version 8.2.0 and later, the Constants Argument #3 ($case_insensitive) 
+     * is ignored since declaration of case-insensitive constants is no longer supported. 
+     * PHP 7.3: Defining case-insensitive constants is deprecated.
+     * PHP 7: The value parameter can also be an array.
+     * PHP 5: The value parameter must be a string, integer, float, boolean or NULL. 
+     */
 
+    echo "<h3>Case-insensitivity demonstration:</h3>";
+    echo "APP_NAME: " . APP_NAME . "<br>";
+    echo "app_name: " . (defined('app_name') ? app_name : 'Not accessible') . "<br>";
+    
     # --- 7. Global Scope Demonstration: ---
+    echo "<h3>Testing constant scope in function:</h3>";
+    echo "APP_NAME inside function: " . "<br>";
+    
 
     # --- 8. Error Handling: ---
-
-    # --- 9. Add Comments: ---
-
-    # --- 10. Test Your Script: ---
+    echo "<h3>Error handling demonstration:</h3>";
+    echo "Error: " . "<br>";
 
     # --- 11. Extend the Project (Optional): ---
 
