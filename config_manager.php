@@ -84,14 +84,29 @@
     
     # --- 7. Global Scope Demonstration: ---
     echo "<h3>Testing constant scope in function:</h3>";
-    echo "APP_NAME inside function: " . "<br>";
-    
+    function global_scope_constants() {
+      echo "APP_NAME inside function: " . APP_NAME . "<br>";
+    }
+    global_scope_constants();
 
     # --- 8. Error Handling: ---
     echo "<h3>Error handling demonstration:</h3>";
-    echo "Error: " . "<br>";
-
+    /* try... catch... statements will not The try-catch block you've used for a fatal error 
+     * will not catch it in this specific way since it is a compile-time error. A more robust 
+     * way to handle this to use defined() function.
+     */
+    if (!defined('APP_NAME')) {
+        // Attempt to redefine a constant (this will trigger an error)
+      define('APP_NAME', 'NewAppName');
+      echo "Constant redefined successfully.";
+    } else {
+        // echo "Error: " . $e->getMessage() . "<br>";
+        echo "Error: Constant APP_NAME is already defined.<br>";
+    }
+    
     # --- 11. Extend the Project (Optional): ---
+    // - Add more complex array constants (e.g., multi-dimensional arrays for configuration).
+    // - Implement a simple function that uses these constants to "configure" some aspect of an application.
 
 
     ?>
