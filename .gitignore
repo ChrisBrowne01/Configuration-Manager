@@ -1,0 +1,10 @@
+# .gitignore
+
+# Environment variables file
+.env
+
+# Composer dependencies
+/vendor/
+
+# Laragon specific files 
+/.laragon

@@ -1,4 +1,11 @@
 <?php
+// Require the Composer autoloader
+require __DIR__ . '/vendor/autoload.php';
+
+// Load the environment variables from the .env file
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 /**
  * Project: PHP Constants - Configuration Manager
  * Description: A mini-project to demonstrate the use of PHP constants, including basic constants,
@@ -18,8 +25,9 @@ define('DB_NAME', getenv('DB_NAME') ?: 'myapp_db');
 // Application Information Constants
 define('APP_NAME', 'MyPHPApp');
 define('APP_VERSION', '1.0.0');
-// define('DEBUG_MODE', getenv('APP_DEBUG') ?: 'Disabled'); // Using a boolean value is more common 
-define('DEBUG_MODE', true); // outputs the same result, when used instead of the line above
+define('DEBUG_MODE', ($_SERVER['APP_DEBUG'] ?? 'false') === 'true'); // If using Largon server enviroment, use the $_SERVER Superglobal instead of getenv()
+// define('DEBUG_MODE', getenv('APP_DEBUG') === 'true'); // Using a boolean value is more common 
+// define('DEBUG_MODE', getenv('APP_DEBUG') === 'Enabled' ? 'Enabled': 'Disabled'); // Using a condition value 
 
 /**
  * Note: The DEBUG_MODE constant is set based on the APP_DEBUG environment variable.
@@ -51,7 +59,7 @@ function displayAppInfo(): void {
   echo "<h3 class='text-2xl font-semibold mt-2'>Application Information:</h3>";
   echo "<p><strong>Name:</strong> " . APP_NAME . "</p>";
   echo "<p><strong>Version:</strong> " . APP_VERSION . "</p>";
-  echo "<p><strong>Debug Mode:</strong> " . (DEBUG_MODE? 'Enabled' : 'Disabled') . "</p>";
+  echo "<p><strong>Debug Mode:</strong> " . (DEBUG_MODE ? 'Enabled' : 'Disabled') . "</p>";
 }
 
 // Write a function to list supported languages.
@@ -83,17 +91,10 @@ function displaySupportedLanguages(): void {
       <?php
       displayDbConfig();
       displayAppInfo();
-      $appDebug = getenv('APP_DEBUG');
-      $debugMode = getenv('DEBUG_MODE');
-      if ($appDebug !== false) { // Check if the environment variable is set
-        echo "APP_DEBUG environment variable is set to: " . $appDebug . "<br>";
+      if (DEBUG_MODE) { // Check if the environment variable is set
+        echo "APP_DEBUG Enabled, environment variable is set to: " .  DEBUG_MODE . "<br>";
       } else {
-        echo "APP_DEBUG environment variable is not set.<br>";
-      }
-      if ($debugMode !== false) { // Check if the environment variable is set
-        echo "DEBUG_MODE environment variable is set to: " . $debugMode . "<br>";
-      } else {
-        echo "DEBUG_MODE environment variable is not set.<br>";
+        echo "APP_DEBUG Disabled, environment variable is not set.<br>";
       }
       echo "<br>";
       displaySupportedLanguages();
